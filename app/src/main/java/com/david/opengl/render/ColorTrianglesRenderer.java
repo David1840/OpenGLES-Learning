@@ -16,7 +16,7 @@ import static com.david.opengl.util.RenderUtil.linkProgram;
 /**
  * @Author: liuwei
  * @Create: 2019/6/26 16:47
- * @Description:
+ * @Description: 绘制一个彩色的三角形
  */
 public class ColorTrianglesRenderer implements GLSurfaceView.Renderer {
     private float[] vertexPoints = new float[]{
