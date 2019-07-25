@@ -21,7 +21,6 @@ import static com.david.opengl.util.RenderUtil.linkProgram;
  * @Description:
  */
 public class CircleRenderer implements GLSurfaceView.Renderer {
-
     private final FloatBuffer vertexBuffer;
     private int uMatrixLocation;
     private final float[] mMatrix = new float[16];
@@ -95,14 +94,7 @@ public class CircleRenderer implements GLSurfaceView.Renderer {
 //        //启用顶点的句柄
         GLES30.glEnableVertexAttribArray(0);
         GLES30.glUniformMatrix4fv(uMatrixLocation, 1, false, mMatrix, 0);
-        //绘制三个点
-//        GLES30.glDrawArrays(GLES30.GL_POINTS, 0, 6);
 
-        //绘制直线
-//        GLES30.glDrawArrays(GLES30.GL_LINE_STRIP, 0, 2);
-//        GLES30.glLineWidth(10);
-
-        //绘制三角形
         GLES30.glDrawArrays(GLES30.GL_TRIANGLE_FAN, 0, 362);
 
         //禁止顶点数组的句柄
