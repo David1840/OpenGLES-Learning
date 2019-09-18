@@ -33,7 +33,7 @@ public class CircleRenderer implements GLSurfaceView.Renderer {
                     "layout (location = 0) in vec4 vPosition;\n" +
                     "uniform mat4 u_Matrix;\n" +
                     "void main() {\n" +
-                    "     gl_Position  = u_Matrix * vPosition;;\n" +
+                    "     gl_Position  = u_Matrix * vPosition;\n" +
                     "     gl_PointSize = 10.0;\n" +
                     "}\n";
 

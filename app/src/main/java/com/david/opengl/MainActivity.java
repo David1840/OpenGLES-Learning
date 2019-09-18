@@ -4,6 +4,7 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.david.opengl.render.BitmapRender;
 import com.david.opengl.render.CircleRenderer;
 import com.david.opengl.render.ColorTrianglesRenderer;
 
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mGLSurfaceView);
         //设置版本
         mGLSurfaceView.setEGLContextClientVersion(3);
-        GLSurfaceView.Renderer renderer = new CircleRenderer();
+        GLSurfaceView.Renderer renderer = new BitmapRender(this);
         mGLSurfaceView.setRenderer(renderer);
     }
 }
