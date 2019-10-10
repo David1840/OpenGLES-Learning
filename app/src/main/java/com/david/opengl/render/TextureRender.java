@@ -23,7 +23,7 @@ import javax.microedition.khronos.opengles.GL10;
  * @Create: 2019/9/18 15:05
  * @Description:
  */
-public class BitmapRender implements GLSurfaceView.Renderer {
+public class TextureRender implements GLSurfaceView.Renderer {
     private static final String TAG = "TextureRenderer";
 
     private final FloatBuffer vertexBuffer, mTexVertexBuffer;
@@ -105,7 +105,7 @@ public class BitmapRender implements GLSurfaceView.Renderer {
                     "     vFragColor = texture(uTextureUnit,vTexCoord);\n" +
                     "}\n";
 
-    public BitmapRender(Context context) {
+    public TextureRender(Context context) {
 
         this.context = context;
         //分配内存空间,每个浮点型占4字节空间
