@@ -1,26 +1,33 @@
 package com.david.opengl;
 
-import android.opengl.GLSurfaceView;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-import com.david.opengl.render.TextureRender;
-
-public class MainActivity extends AppCompatActivity {
-    private GLSurfaceView mGLSurfaceView;
-
+/**
+ * @Author: liuwei
+ * @Create: 2019/10/11 11:32
+ * @Description:
+ */
+public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupViews();
-    }
+        setContentView(R.layout.activity_main);
 
-    private void setupViews() {
-        mGLSurfaceView = new GLSurfaceView(this);
-        setContentView(mGLSurfaceView);
-        //设置版本
-        mGLSurfaceView.setEGLContextClientVersion(3);
-        GLSurfaceView.Renderer renderer = new TextureRender(this);
-        mGLSurfaceView.setRenderer(renderer);
+        findViewById(R.id.btn_texture).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TextureActivity.class));
+            }
+        });
+
+        findViewById(R.id.btn_surface).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Camera1SurfaceActivity.class));
+            }
+        });
     }
 }
