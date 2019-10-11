@@ -21,5 +21,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp"
-        android:text="相机预览" />
+        android:text="Camera预览" />
+
+    <Button
+        android:id="@+id/btn_surface2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:text="Camera2预览" />
 </LinearLayout>

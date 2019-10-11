@@ -120,7 +120,7 @@ public class Camera2SurfaceActivity extends Activity {
                 return;
             }
 
-//            surfaceTexture.setDefaultBufferSize(photoSize.getWidth(), photoSize.getHeight());
+            surfaceTexture.setDefaultBufferSize(photoSize.getWidth(), photoSize.getHeight());
             surfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableListener() {
                 @Override
                 public void onFrameAvailable(final SurfaceTexture surfaceTexture) {
@@ -156,8 +156,8 @@ public class Camera2SurfaceActivity extends Activity {
     private void initCamera() {
         cameraManager = (CameraManager) MyApplication.getApplication().getSystemService(Context.CAMERA_SERVICE);
         cameraId = CameraCharacteristics.LENS_FACING_FRONT;
-//        outputSizes = getCameraOutputSizes(cameraId, SurfaceTexture.class);
-//        photoSize = outputSizes.get(16);
+        outputSizes = getCameraOutputSizes(cameraId, SurfaceTexture.class);
+        photoSize = outputSizes.get(1);
     }
 
     @SuppressLint("MissingPermission")
