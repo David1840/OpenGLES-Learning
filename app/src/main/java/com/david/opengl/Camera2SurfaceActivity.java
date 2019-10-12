@@ -35,7 +35,7 @@ import java.util.List;
 public class Camera2SurfaceActivity extends Activity {
     private static final String TAG = "Camera2SurfaceActivity";
     private static CameraManager cameraManager;
-    private int cameraId;
+    private int cameraId = 1; //前置摄像头
     List<Size> outputSizes;
     Size photoSize;
     CameraDevice cameraDevice;
@@ -51,15 +51,15 @@ public class Camera2SurfaceActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        applyPermission();
+        requestPermission();
     }
 
-    private void applyPermission() {
+    private void requestPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 100);
         } else {
             initCamera();
-            setView();
+            setupViews();
         }
     }
 
@@ -69,7 +69,7 @@ public class Camera2SurfaceActivity extends Activity {
         if (requestCode == 100 && grantResults != null && grantResults.length > 0) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 initCamera();
-                setView();
+                setupViews();
             }
         }
     }
@@ -80,7 +80,7 @@ public class Camera2SurfaceActivity extends Activity {
         openCamera();
     }
 
-    private void setView() {
+    private void setupViews() {
         //实例化一个GLSurfaceView
         mGLSurfaceView = new GLSurfaceView(this);
         mGLSurfaceView.setEGLContextClientVersion(3);
@@ -121,6 +121,8 @@ public class Camera2SurfaceActivity extends Activity {
             }
 
             surfaceTexture.setDefaultBufferSize(photoSize.getWidth(), photoSize.getHeight());
+            Log.e(TAG, " " + photoSize.getWidth() + ":" + photoSize.getHeight());
+
             surfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableListener() {
                 @Override
                 public void onFrameAvailable(final SurfaceTexture surfaceTexture) {
@@ -155,15 +157,15 @@ public class Camera2SurfaceActivity extends Activity {
 
     private void initCamera() {
         cameraManager = (CameraManager) MyApplication.getApplication().getSystemService(Context.CAMERA_SERVICE);
-        cameraId = CameraCharacteristics.LENS_FACING_FRONT;
+        //获取指定相机的输出尺寸列表
         outputSizes = getCameraOutputSizes(cameraId, SurfaceTexture.class);
-        photoSize = outputSizes.get(1);
+        photoSize = outputSizes.get(3);
     }
 
     @SuppressLint("MissingPermission")
     private void openCamera() {
         try {
-            cameraManager.openCamera(String.valueOf(1), cameraStateCallback, null);
+            cameraManager.openCamera(String.valueOf(cameraId), cameraStateCallback, null);
         } catch (CameraAccessException e) {
             e.printStackTrace();
             Log.e(TAG, "openCamera fail");
@@ -171,6 +173,7 @@ public class Camera2SurfaceActivity extends Activity {
     }
 
 
+    //获取指定相机的输出尺寸列表，降序排序（第一个的清晰度最高，往后清晰度越低）
     public List<Size> getCameraOutputSizes(int cameraId, Class clz) {
         try {
             CameraCharacteristics characteristics = cameraManager.getCameraCharacteristics(String.valueOf(cameraId));

@@ -135,9 +135,6 @@ public class Camera2SurfaceRenderer implements GLSurfaceView.Renderer {
         uTextureMatrixLocation = GLES30.glGetUniformLocation(mProgram, "uTextureMatrix");
         //获取Shader中定义的变量在program中的位置
         uTextureSamplerLocation = GLES30.glGetUniformLocation(mProgram, "yuvTexSampler");
-
-        Log.e("Renderer", "onSurfaceCreated mSurfaceTexture" + mSurfaceTexture.getTimestamp());
-
     }
 
     @Override

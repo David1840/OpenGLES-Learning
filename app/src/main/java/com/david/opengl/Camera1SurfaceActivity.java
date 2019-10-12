@@ -22,14 +22,14 @@ public class Camera1SurfaceActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        applyPermission();
+        requestPermission();
     }
 
-    private void applyPermission() {
+    private void requestPermission() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_CODE);
         } else {
-            setView();
+            setupViews();
         }
     }
 
@@ -38,12 +38,12 @@ public class Camera1SurfaceActivity extends Activity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_CODE && grantResults != null && grantResults.length > 0) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                setView();
+                setupViews();
             }
         }
     }
 
-    private void setView() {
+    private void setupViews() {
         //实例化一个GLSurfaceView
         mGLSurfaceView = new GLSurfaceView(this);
         mGLSurfaceView.setEGLContextClientVersion(3);

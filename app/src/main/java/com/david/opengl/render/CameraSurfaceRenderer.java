@@ -148,8 +148,8 @@ public class CameraSurfaceRenderer implements GLSurfaceView.Renderer {
         int result;
         if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
             result = (info.orientation + degrees) % 360;
-            result = (360 - result) % 360;  // compensate the mirror
-        } else {  // back-facing
+            result = (360 - result) % 360;
+        } else {
             result = (info.orientation - degrees + 360) % 360;
         }
         camera.setDisplayOrientation(result);
@@ -240,10 +240,11 @@ public class CameraSurfaceRenderer implements GLSurfaceView.Renderer {
         mSurfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableListener() {
             @Override
             public void onFrameAvailable(SurfaceTexture surfaceTexture) {
+                // 渲染帧数据
                 mGLSurfaceView.requestRender();
             }
         });
-        //设置SurfaceTexture作为相机预览输出
+        //SurfaceTexture作为相机预览输出
         try {
             mCamera.setPreviewTexture(mSurfaceTexture);
         } catch (IOException e) {
